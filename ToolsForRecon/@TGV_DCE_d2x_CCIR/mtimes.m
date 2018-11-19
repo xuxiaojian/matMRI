@@ -1,0 +1,13 @@
+function res = mtimes(a,u)
+
+[Ny,~,Np,Nc] = size(u);
+    
+if a.adjoint
+    res =   cat(2,u(:,1:end-2,:,:),zeros(Ny,1,Np,Nc),zeros(Ny,1,Np,Nc))...
+         -2*cat(2,zeros(Ny,1,Np,Nc),u(:,1:end-2,:,:),zeros(Ny,1,Np,Nc))...
+           +cat(2,zeros(Ny,1,Np,Nc),zeros(Ny,1,Np,Nc),u(:,1:end-2,:,:));
+else
+    res =   u... 
+         -2*cat(2,u(:,2:end,:,:),u(:,end,:,:))...
+           +cat(2,u(:,3:end,:,:),u(:,end,:,:),u(:,end,:,:));
+end

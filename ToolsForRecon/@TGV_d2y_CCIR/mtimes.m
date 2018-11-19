@@ -1,0 +1,13 @@
+function res = mtimes(a,u)
+
+[~,Nx,Np] = size(u);
+    
+if a.adjoint
+    res =   cat(1,u(1:end-2,:,:),zeros(1,Nx,Np),zeros(1,Nx,Np))...
+         -2*cat(1,zeros(1,Nx,Np),u(1:end-2,:,:),zeros(1,Nx,Np))...
+           +cat(1,zeros(1,Nx,Np),zeros(1,Nx,Np),u(1:end-2,:,:));
+else
+    res =   u... 
+         -2*cat(1,u(2:end,:,:),u(end,:,:))...
+           +cat(1,u(3:end,:,:),u(end,:,:),u(end,:,:));
+end
